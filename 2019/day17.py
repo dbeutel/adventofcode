@@ -1,12 +1,6 @@
 from time import sleep
 import os
 
-def clear():
-    if os.name == 'nt':
-        os.system('cls')
-    else:
-        os.system('clear')
-
 from intcode import Intcode
 
 with open('input17.txt', 'r') as f:
@@ -63,7 +57,7 @@ while x == '' or x == 'y':
                     first = False
                 else:
                     sleep(0.1)
-                    clear()
+                    os.system('cls' if os.name == 'nt' else 'clear')
             if ord(c) != res:
                 print(c, end='')
         if ret == 1:
