@@ -34,10 +34,10 @@ matchzero = 0
 for i in message:
     if p.match(i):
         matchzero += 1
+
 print(matchzero)
 
 p = re.compile('^((' + rule[42] + ')+)((' + rule[31] + ')+)$')
-q = re.compile(rule[31] + '+$')
 matchzero = 0
 for i in message:
     x = p.search(i)
