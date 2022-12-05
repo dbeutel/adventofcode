@@ -2,25 +2,26 @@ import copy
 import re
 
 regex = re.compile(r"^move ([0-9]+) from ([0-9]+) to ([0-9]+)$")
-stacks = [[] for _ in range(9)]
+stacks = {}
 
 with open("input05.txt", "r") as fobj:
     for line in fobj:
-        if line == " 1   2   3   4   5   6   7   8   9 \n":
+        if line.strip().startswith("["):
+            for i, crate in enumerate(line[1::4]):
+                if crate != " ":
+                    stacks.setdefault(i, []).insert(0, crate)
+        elif line == "\n":
             break
-        items = line[1::4]
-        for item, stack in zip(items, stacks):
-            if item != " ":
-                stack.insert(0, item)
+        else:
+            stacks = {int(key): stacks[i] for i, key in enumerate(line[1::4])}
 
     stacks_9001 = copy.deepcopy(stacks)
-    next(fobj)
     for line in fobj:
-        repeat, origin, dest = (int(i) for i in regex.match(line).groups())
+        repeat, origin, dest = map(int, regex.match(line).groups())
         for _ in range(repeat):
-            stacks[dest - 1].append(stacks[origin - 1].pop())
-        stacks_9001[dest - 1].extend(stacks_9001[origin - 1][-repeat:])
-        del stacks_9001[origin - 1][-repeat:]
+            stacks[dest].append(stacks[origin].pop())
+        stacks_9001[dest].extend(stacks_9001[origin][-repeat:])
+        del stacks_9001[origin][-repeat:]
 
-print("".join(stack[-1] for stack in stacks))
-print("".join(stack[-1] for stack in stacks_9001))
+print("".join(stack[-1] for stack in stacks.values()))
+print("".join(stack[-1] for stack in stacks_9001.values()))
