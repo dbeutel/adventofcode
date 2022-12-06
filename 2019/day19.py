@@ -2,8 +2,8 @@ import itertools
 
 from intcode import Intcode
 
-with open('input19.txt', 'r') as f:
-    tape = [int(i) for i in f.read().split(',')]
+with open("input19.txt", "r") as f:
+    tape = [int(i) for i in f.read().split(",")]
 
 total = 0
 for y, x in itertools.product(range(50), repeat=2):
@@ -12,9 +12,9 @@ for y, x in itertools.product(range(50), repeat=2):
     res = c.flush()[0]
     if res == 1:
         total += 1
-        print('#', end='')
+        print("#", end="")
     else:
-        print('.', end='')
+        print(".", end="")
     if x == 49:
         print()
 print(total)
@@ -34,5 +34,6 @@ def checkspace(a):
                 if c.flush()[0]:
                     return x * 10000 + (y - 99)
                 break
+
 
 print(checkspace(10000))

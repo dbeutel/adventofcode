@@ -1,4 +1,6 @@
-import itertools, math
+import itertools
+import math
+
 
 def ggt(a, b):
     if a == 0:
@@ -17,9 +19,11 @@ def angle(x, y):
 
 
 asteroids = set()
-with open('input10.txt', 'r') as f:
+with open("input10.txt", "r") as f:
     for y, line in enumerate(f.readlines()):
-        asteroids = asteroids.union([(x, y) for x, c in enumerate(line.strip()) if c == '#'])
+        asteroids = asteroids.union(
+            [(x, y) for x, c in enumerate(line.strip()) if c == "#"]
+        )
 
 
 res = {}

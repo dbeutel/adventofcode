@@ -1,17 +1,18 @@
 import re
 
-with open('input06.txt', 'r') as f:
+with open("input06.txt", "r") as f:
     lines = f.readlines()
+
 
 def nyes(text):
     anyone = everyone = 0
-    for c in 'abcdefghijklmnopqrstuvwxyz':
+    for c in "abcdefghijklmnopqrstuvwxyz":
         p = re.compile(c)
         if p.search(text):
             anyone += 1
             check_every = True
-            for line in text.split('\n'):
-                if line == '':
+            for line in text.split("\n"):
+                if line == "":
                     continue
                 if not p.search(line):
                     check_every = False
@@ -20,14 +21,15 @@ def nyes(text):
                 everyone += 1
     return anyone, everyone
 
+
 anyone = everyone = 0
-current = ''
+current = ""
 for line in lines:
-    if line == '\n':
+    if line == "\n":
         a, b = nyes(current)
         anyone += a
         everyone += b
-        current = ''
+        current = ""
     else:
         current = current + line
 

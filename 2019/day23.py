@@ -1,7 +1,7 @@
 from intcode import Intcode
 
-with open('input23.txt', 'r') as f:
-    tape = [int(i) for i in f.read().split(',')]
+with open("input23.txt", "r") as f:
+    tape = [int(i) for i in f.read().split(",")]
 
 
 def run(tape):
@@ -26,7 +26,7 @@ def run(tape):
                 nat = [x, y]
             else:
                 cs[d].input = [x, y]
-        if idle > 50: # just to be safe it's really idle :)
+        if idle > 50:  # just to be safe it's really idle :)
             if y == lasty:
                 return firsty, lasty
             lasty = y
@@ -34,6 +34,7 @@ def run(tape):
             i = 0
         else:
             i = (i + 1) % 50
+
 
 res = run(tape)
 print(res[0])

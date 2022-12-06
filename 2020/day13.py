@@ -1,11 +1,10 @@
 import functools
 
-
-with open('input13.txt', 'r') as f:
+with open("input13.txt", "r") as f:
     lines = f.readlines()
 
 earliest = int(lines[0])
-ids = [int(x) for x in lines[1].split(',') if x != 'x']
+ids = [int(x) for x in lines[1].split(",") if x != "x"]
 
 waitingtime = [((earliest - 1) // id + 1) * id - earliest for id in ids]
 next, idx = min((val, idx) for (idx, val) in enumerate(waitingtime))
@@ -16,7 +15,7 @@ print(next * ids[idx])
 # which it only has a relative offset that corresponds to itself.
 # So an educated guess later we only need to find the right combination of those to
 # groups.
-offsets = [t for t, x in enumerate(lines[1].split(',')) if x != 'x']
+offsets = [t for t, x in enumerate(lines[1].split(",")) if x != "x"]
 
 maxidx = nextmaxidx = 0
 for i, (id, offset) in enumerate(zip(ids, offsets)):

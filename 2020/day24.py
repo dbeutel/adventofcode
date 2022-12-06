@@ -1,15 +1,25 @@
 import re
 
-p = re.compile('ne|se|sw|nw|e|w')
+p = re.compile("ne|se|sw|nw|e|w")
 
-with open('input24.txt', 'r') as f:
+with open("input24.txt", "r") as f:
     tiles = [p.findall(line) for line in f.readlines()]
 
 # print(tiles)
-direction = {'ne': (1, 0), 'nw': (0, 1), 'sw': (-1, 0), 'se': (0, -1), 'e': (1, -1), 'w': (-1, 1)}
+direction = {
+    "ne": (1, 0),
+    "nw": (0, 1),
+    "sw": (-1, 0),
+    "se": (0, -1),
+    "e": (1, -1),
+    "w": (-1, 1),
+}
+
+
 def move(x, y, dir):
     dx, dy = direction[dir]
     return x + dx, y + dy
+
 
 black = set()
 for tile in tiles:
@@ -37,6 +47,7 @@ def nextday(black):
             if v == 2:
                 black.add(k)
     return black
+
 
 for _ in range(100):
     nextday(black)

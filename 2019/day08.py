@@ -1,6 +1,6 @@
 import numpy as np
 
-with open('input08.txt', 'r') as f:
+with open("input08.txt", "r") as f:
     data = np.array([int(i) for i in f.read().strip()])
 
 data = data.reshape((-1, 6, 25))
@@ -19,4 +19,4 @@ for layer in data[1:]:
     pic[pic == 2] = layer[pic == 2]
 
 for line in pic:
-    print(''.join(['#' if i == 1 else ' ' for i in line]))
+    print("".join(["#" if i == 1 else " " for i in line]))

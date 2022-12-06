@@ -1,36 +1,36 @@
 import re
 
-with open('input16.txt', 'r') as f:
+with open("input16.txt", "r") as f:
     lines = f.readlines()
 
 part = 0
 fields = {}
 tickets = []
-p = re.compile('([a-z ]*): ([0-9-]*) or ([0-9-]*)')
+p = re.compile("([a-z ]*): ([0-9-]*) or ([0-9-]*)")
 maximum = -1
 minimum = 1000
 for line in lines:
-    if line == '\n':
+    if line == "\n":
         continue
-    if line == 'your ticket:\n':
+    if line == "your ticket:\n":
         part = 1
         continue
-    if line == 'nearby tickets:\n':
+    if line == "nearby tickets:\n":
         part = 2
         continue
     if part == 0:
         a = p.search(line)
-        xmin, xmax = [int(i) for i in a.group(2).split('-')]
-        ymin, ymax = [int(i) for i in a.group(3).split('-')]
+        xmin, xmax = [int(i) for i in a.group(2).split("-")]
+        ymin, ymax = [int(i) for i in a.group(3).split("-")]
         if maximum < ymax:
             maximum = ymax
         if minimum > xmin:
             minimum = xmin
         fields[a.group(1)] = [(xmin, xmax), (ymin, ymax)]
     if part == 1:
-        myticket = [int(i) for i in line.split(',')]
+        myticket = [int(i) for i in line.split(",")]
     if part == 2:
-        tickets.append([int(i) for i in line.split(',')])
+        tickets.append([int(i) for i in line.split(",")])
 
 ninvalid = 0
 validtickets = []
@@ -68,6 +68,6 @@ while i < len(pos):
 
 res = 1
 for i, key in enumerate(fields):
-    if key[0:9] == 'departure':
+    if key[0:9] == "departure":
         res *= myticket[next(iter(pos[i]))]
 print(res)

@@ -1,4 +1,4 @@
-with open('input01.txt', 'r') as f:
+with open("input01.txt", "r") as f:
     lines = [int(line) for line in f.readlines()]
 
 a = []

@@ -1,15 +1,20 @@
 import numpy as np
 import scipy.signal as sg
 
-with open('input11.txt', 'r') as f:
-    grid = np.array([[int(x) for x in line.strip('\n').replace('.', '2').replace('L', '0')]
-            for line in f.readlines()])
+with open("input11.txt", "r") as f:
+    grid = np.array(
+        [
+            [int(x) for x in line.strip("\n").replace(".", "2").replace("L", "0")]
+            for line in f.readlines()
+        ]
+    )
     grid = np.ma.masked_array(grid, mask=grid == 2)
 
 adjacent = np.array([[1, 1, 1], [1, 0, 1], [1, 1, 1]])
 
+
 def apply_rules(grid):
-    neighbours = sg.convolve2d(grid.filled(0), adjacent, mode='same')
+    neighbours = sg.convolve2d(grid.filled(0), adjacent, mode="same")
     newgrid = grid.copy()
     for i, j in np.ndindex(grid.shape):
         if grid[i, j] == np.ma.masked:
@@ -27,7 +32,16 @@ def apply_rules_2(grid):
         if grid[x, y] == np.ma.masked:
             continue
         n = 0
-        for dx, dy in [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]:
+        for dx, dy in [
+            (1, 0),
+            (1, 1),
+            (0, 1),
+            (-1, 1),
+            (-1, 0),
+            (-1, -1),
+            (0, -1),
+            (1, -1),
+        ]:
             ix, iy = x + dx, y + dy
             while 0 <= ix < grid.shape[0] and 0 <= iy < grid.shape[1]:
                 if grid[ix, iy] == 1:

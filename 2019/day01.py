@@ -1,4 +1,4 @@
-with open('input01.txt', 'r') as f:
+with open("input01.txt", "r") as f:
     masses = [int(i) for i in f.readlines()]
 
 print(sum([m // 3 - 2 for m in masses]))

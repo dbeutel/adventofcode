@@ -1,5 +1,6 @@
 from intcode import Intcode
 
+
 def run(code, white):
     painted = set()
     x = y = dx = 0
@@ -23,8 +24,9 @@ def run(code, white):
             x, y = x + dx, y + dy
     return len(painted)
 
-with open('input11.txt', 'r') as f:
-    tape = [int(i) for i in f.read().split(',')]
+
+with open("input11.txt", "r") as f:
+    tape = [int(i) for i in f.read().split(",")]
 
 print(run(Intcode(tape), set()))
 
@@ -39,9 +41,9 @@ for x, y in white:
     xmax = max(xmax, x)
     ymax = max(ymax, y)
 
-picture = [[' '] * (xmax - xmin + 1) for _ in range(ymax - ymin + 1)]
+picture = [[" "] * (xmax - xmin + 1) for _ in range(ymax - ymin + 1)]
 for x, y in white:
-    picture[y - ymin][x - xmin] = '#'
+    picture[y - ymin][x - xmin] = "#"
 
 for line in picture[::-1]:
-    print(''.join(line))
+    print("".join(line))

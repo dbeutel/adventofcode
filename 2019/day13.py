@@ -2,6 +2,7 @@ from time import sleep
 
 from intcode import Intcode
 
+
 def sign(x):
     if x == 0:
         return 0
@@ -9,7 +10,10 @@ def sign(x):
         return 1
     return -1
 
-decode = [' ', '#', '=', '-', 'o']
+
+decode = [" ", "#", "=", "-", "o"]
+
+
 class Screen:
     def __init__(self, size=(37, 26)):
         x, y = size
@@ -33,12 +37,12 @@ class Screen:
 
     def print(self):
         for line in self.screen:
-            print(''.join([decode[i] for i in line]))
-        print(f'Score: {self.score}')
+            print("".join([decode[i] for i in line]))
+        print(f"Score: {self.score}")
 
 
-with open('input13.txt', 'r') as f:
-    tape = [int(i) for i in f.read().split(',')]
+with open("input13.txt", "r") as f:
+    tape = [int(i) for i in f.read().split(",")]
 
 c = Intcode(tape)
 c.run()
@@ -51,7 +55,7 @@ print(total)
 
 
 tape[0] = 2
-video = input('Video (Y/n)? ').lower().strip() in ('', 'y')
+video = input("Video (Y/n)? ").lower().strip() in ("", "y")
 c = Intcode(tape)
 ret = c.run()
 screen = Screen()
@@ -59,7 +63,7 @@ while ret != 0:
     screen.update(c.flush())
     if video:
         screen.print()
-        sleep(.025)
+        sleep(0.025)
     c.input = sign(screen.ballx - screen.paddlex)
     ret = c.run()
 screen.update(c.flush())

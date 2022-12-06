@@ -1,5 +1,6 @@
-cuporder = [int(i) for i in '716892543']
+cuporder = [int(i) for i in "716892543"]
 # cuporder = [int(i) for i in '389125467']
+
 
 def parsecups(cuporder, maxvalue):
     cups = [0] + list(range(2, maxvalue + 1)) + [1]
@@ -39,7 +40,7 @@ for _ in range(100):
     step(cups, current, 9)
     current = cups[current]
 
-print(''.join([str(i) for i in undocupsparse(cups, 1)[1:]]))
+print("".join([str(i) for i in undocupsparse(cups, 1)[1:]]))
 
 current, cups = parsecups(cuporder, 1_000_000)
 for _ in range(10_000_000):

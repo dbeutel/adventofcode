@@ -35,10 +35,10 @@ def cycle(active):
 
 
 input = set()
-with open('input17.txt', 'r') as f:
+with open("input17.txt", "r") as f:
     for x, line in enumerate(f.readlines()):
         for y, c in enumerate(line.strip()):
-            if c == '#':
+            if c == "#":
                 input.add((x, y, 0))
 
 active = input

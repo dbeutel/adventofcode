@@ -1,18 +1,18 @@
 player1 = []
 player2 = []
 
-with open('input22.txt', 'r') as f:
+with open("input22.txt", "r") as f:
     for line in f.readlines():
-        if line.strip() == 'Player 1:':
+        if line.strip() == "Player 1:":
             addto = player1
-        elif line.strip() == 'Player 2:':
+        elif line.strip() == "Player 2:":
             addto = player2
         elif line.strip():
             addto.append(int(line))
 
+
 def score(deck):
     return sum([(i + 1) * x for i, x in enumerate(deck[::-1])])
-
 
 
 def combat(player1, player2):
@@ -27,7 +27,9 @@ def combat(player1, player2):
 
     return score(player1), score(player2)
 
+
 print(max(combat(player1.copy(), player2.copy())))
+
 
 def deckvalue(deck, acc=0):
     if deck:
@@ -35,6 +37,7 @@ def deckvalue(deck, acc=0):
         acc = acc * 100 + a
         return deckvalue(deck, acc)
     return acc
+
 
 def recursivecombat(player1, player2):
     existing1 = set()
@@ -59,5 +62,6 @@ def recursivecombat(player1, player2):
             player2.append(a)
 
     return score(player1), score(player2)
+
 
 print(max(recursivecombat(player1.copy(), player2.copy())))

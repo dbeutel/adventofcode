@@ -1,8 +1,9 @@
 orbits = {}
-with open('input06.txt', 'r') as f:
+with open("input06.txt", "r") as f:
     for line in f.readlines():
-        a, b = line.strip().split(')')
+        a, b = line.strip().split(")")
         orbits.setdefault(a, set()).add(b)
+
 
 def countorbits(orbits, key, cache=None):
     if cache is None:
@@ -17,9 +18,11 @@ def countorbits(orbits, key, cache=None):
     cache[key] = (direct, indirect)
     return direct, indirect
 
+
 cache = {}
-countorbits(orbits, 'COM', cache)
+countorbits(orbits, "COM", cache)
 print(sum([sum(i) for i in cache.values()]))
+
 
 def find(goal, orbits, key):
     if key == goal:
@@ -31,8 +34,9 @@ def find(goal, orbits, key):
             return found
     return []
 
-you = find('YOU', orbits, 'COM')
-san = find('SAN', orbits, 'COM')
+
+you = find("YOU", orbits, "COM")
+san = find("SAN", orbits, "COM")
 while you[-1] == san[-1]:
     y = you.pop()
     s = san.pop()

@@ -1,7 +1,6 @@
-
 def nvalid(intrvl, pos, prevdigit=-1, doubled=False, atmin=True, atmax=True):
-    start = max((intrvl[0] // (10 ** pos)) % 10, prevdigit) if atmin else prevdigit
-    stop = (intrvl[1] // (10 ** pos)) % 10 if atmax else 9
+    start = max((intrvl[0] // (10**pos)) % 10, prevdigit) if atmin else prevdigit
+    stop = (intrvl[1] // (10**pos)) % 10 if atmax else 9
     if pos == 0:
         if doubled:
             return stop - start + 1
@@ -16,13 +15,14 @@ def nvalid(intrvl, pos, prevdigit=-1, doubled=False, atmin=True, atmax=True):
         total += nvalid(intrvl, pos - 1, i, nowdoubled, nowatmin, nowatmax)
     return total
 
+
 def nvalid2(intrvl, pos, prevdigit=-1, doubled=0, atmin=True, atmax=True):
     # doubled = 0 -> single digit
     # doubled = 1 -> vulnerable double (the only valid double is at the end)
     # doubled = 2 -> overshooted (triple...)
     # doubled = 3 -> safe double
-    start = max((intrvl[0] // (10 ** pos)) % 10, prevdigit) if atmin else prevdigit
-    stop = (intrvl[1] // (10 ** pos)) % 10 if atmax else 9
+    start = max((intrvl[0] // (10**pos)) % 10, prevdigit) if atmin else prevdigit
+    stop = (intrvl[1] // (10**pos)) % 10 if atmax else 9
     if pos == 0:
         if doubled in (1, 3):
             if doubled == 1 and prevdigit in range(start, stop + 1):
@@ -46,6 +46,7 @@ def nvalid2(intrvl, pos, prevdigit=-1, doubled=0, atmin=True, atmax=True):
         nowatmax = atmax and i == stop
         total += nvalid2(intrvl, pos - 1, i, nowdoubled, nowatmin, nowatmax)
     return total
+
 
 intrvl = (246515, 739105)
 print(nvalid(intrvl, len(str(intrvl[1])) - 1))

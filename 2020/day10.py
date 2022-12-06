@@ -1,4 +1,4 @@
-with open('input10.txt', 'r') as f:
+with open("input10.txt", "r") as f:
     adapters = sorted([int(line) for line in f.readlines()])
     adapters = [0] + adapters + [adapters[-1] + 3]
 

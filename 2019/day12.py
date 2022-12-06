@@ -1,4 +1,6 @@
-import functools, itertools, re
+import functools
+import itertools
+import re
 
 import numpy as np
 
@@ -64,9 +66,9 @@ def runsingle(pos, vel):
 
 pos = []
 vel = []
-with open('input12.txt', 'r') as f:
+with open("input12.txt", "r") as f:
     for line in f.readlines():
-        pos.append([int(i) for i in re.findall('-?\d+', line)])
+        pos.append([int(i) for i in re.findall("-?\d+", line)])
         vel.append([0, 0, 0])
 pos = np.array(pos)
 vel = np.array(vel)
@@ -85,6 +87,6 @@ for i, (singlepos, singlevel) in enumerate(zip(pos_t, vel_t)):
         if p == singlepos and v == singlevel:
             res[i] = j
             break
-        j +=1
+        j += 1
 
 print(lcm(*res))

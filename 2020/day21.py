@@ -3,13 +3,13 @@ import functools
 ingredients = []
 allergens = []
 allings = set()
-with open('input21.txt', 'r') as f:
+with open("input21.txt", "r") as f:
     for line in f.readlines():
-        i, a = line.replace(')', '').split('(contains ')
-        ings = set([x.strip() for x in i.strip().split(' ')])
+        i, a = line.replace(")", "").split("(contains ")
+        ings = set([x.strip() for x in i.strip().split(" ")])
         ingredients.append(ings)
         allings = allings.union(ings)
-        allergens.append(set([x.strip() for x in a.strip().split(',')]))
+        allergens.append(set([x.strip() for x in a.strip().split(",")]))
 
 candidates = {}
 for ings, allgs in zip(ingredients, allergens):
@@ -34,4 +34,4 @@ for ings in ingredients:
 print(total)
 
 allergenssorted = sorted(candidates)
-print(','.join([next(iter(candidates[i])) for i in allergenssorted]))
+print(",".join([next(iter(candidates[i])) for i in allergenssorted]))

@@ -1,13 +1,16 @@
 import itertools
 
 input = []
-with open('input09.txt', 'r') as f:
+with open("input09.txt", "r") as f:
     for line in f.readlines():
         input.append(int(line))
 
+
 def part1(input, pre=25):
     for i, x in enumerate(input[pre:]):
-        if all([x != y + z for y, z in itertools.product(input[i:i + pre], repeat=2)]):
+        if all(
+            [x != y + z for y, z in itertools.product(input[i : i + pre], repeat=2)]
+        ):
             return x
     return None
 
