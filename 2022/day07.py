@@ -3,7 +3,7 @@ def du(dirs, res):
     return res
 
 
-cwd = [root := {}]
+cwd = [{}]
 
 with open("input07.txt", "r") as fobj:
     for line in fobj:
@@ -11,13 +11,13 @@ with open("input07.txt", "r") as fobj:
         if line == "$ cd ..":
             cwd.pop()
         elif line == "$ cd /":
-            cwd = [root]
+            cwd = cwd[:1]
         elif line.startswith("$ cd "):
             cwd.append(cwd[-1].setdefault(line[5:], {}))
         elif not line.startswith("dir ") and line != "$ ls":
             size, name = line.split()
             cwd[-1][name] = int(size)
 
-res = du(root, [])
+res = du(cwd[0], [])
 print(sum(i for i in res if i < 100_000))
 print(min(i for i in res if i > res[-1] - 40_000_000))
