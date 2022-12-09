@@ -4,7 +4,8 @@ def step(d):
 
 def update(s):
     rope[0] += s
-    rope[1:] = map(lambda x: x[1] + step(x[0] - x[1]), zip(rope, rope[1:]))
+    for i, (x, y) in enumerate(zip(rope, rope[1:])):
+        rope[i + 1] = y + step(x - y)
     return rope[-1]
 
 
