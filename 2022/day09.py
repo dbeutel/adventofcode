@@ -1,9 +1,4 @@
-directions = {
-    "U": (0, 1),
-    "R": (1, 0),
-    "D": (0, -1),
-    "L": (-1, 0),
-}
+directions = {"U": (0, 1), "R": (1, 0), "D": (0, -1), "L": (-1, 0)}
 
 
 def sign(x):
@@ -14,7 +9,7 @@ def sign(x):
     return 0
 
 
-def dirtail(head, tail):
+def step(head, tail):
     x = head[0] - tail[0]
     y = head[1] - tail[1]
     if x in (-1, 0, 1) and y in (-1, 0, 1):
@@ -30,7 +25,7 @@ def simulation(n, fobj):
         for _ in range(int(steps)):
             rope[0] = tuple(map(sum, zip(rope[0], directions[key])))
             for i in range(1, len(rope)):
-                rope[i] = tuple(map(sum, zip(rope[i], dirtail(rope[i - 1], rope[i]))))
+                rope[i] = tuple(map(sum, zip(rope[i], step(rope[i - 1], rope[i]))))
             visited.add(rope[-1])
     print(len(visited))
 
