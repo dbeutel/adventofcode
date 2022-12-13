@@ -1,3 +1,4 @@
+from ast import literal_eval
 from functools import cmp_to_key
 from itertools import zip_longest
 
@@ -14,7 +15,7 @@ def cmp(a, b):
     return 0
 
 
-sig = list(map(eval, open("input13.txt").read().split()))  # too tempting to use eval
+sig = list(map(literal_eval, open("input13.txt").read().split()))
 print(sum(i + 1 for i, (a, b) in enumerate(zip(sig[::2], sig[1::2])) if cmp(a, b) < 0))
 sig = sorted(sig + [[[2]], [[6]]], key=cmp_to_key(cmp))
 print((sig.index([[2]]) + 1) * (sig.index([[6]]) + 1))
