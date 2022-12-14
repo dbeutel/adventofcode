@@ -1,5 +1,5 @@
 import ast
-from itertools import product
+from itertools import pairwise, product
 
 
 def run(rocks, until, threshold):
@@ -18,8 +18,7 @@ def run(rocks, until, threshold):
 rocks = set()
 with open("input14.txt") as fobj:
     for line in fobj:
-        corners = [*map(ast.literal_eval, line.split(" -> "))]
-        for c in zip(corners, corners[1:]):
+        for c in pairwise(map(ast.literal_eval, line.split(" -> "))):
             rocks |= {*product(*map(lambda p: range(min(p), max(p) + 1), zip(*c)))}
 
 nrocks = len(rocks)
