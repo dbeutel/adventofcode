@@ -1,5 +1,4 @@
 import ast
-import copy
 from itertools import product
 
 
@@ -11,7 +10,7 @@ def run(rocks, until, threshold):
                 x, y = x + dx, y + 1
                 break
         else:
-            rocks.add((x, y))
+            rocks = rocks | {(x, y)}
             x, y = 500, 0
     return rocks
 
@@ -26,6 +25,6 @@ with open("input14.txt") as fobj:
             rocks |= {*product(*map(lambda p: range(min(p), max(p) + 1), zip(*c)))}
 
 nrocks = len(rocks)
-rcks = copy.deepcopy(rocks)
+maxy = max(map(lambda i: i[1], rocks))
 print(len(run(rocks, lambda y, _: y <= maxy, lambda y: True)) - nrocks)
-print(len(run(rcks, lambda _, r: (500, 0) not in r, lambda y: y < maxy + 1)) - nrocks)
+print(len(run(rocks, lambda _, r: (500, 0) not in r, lambda y: y < maxy + 1)) - nrocks)
