@@ -1,4 +1,11 @@
-from operator import add, floordiv, mul, sub
+from operator import add, mul, sub
+
+
+def div(x, y):
+    a, b = divmod(x, y)
+    if b != 0:
+        raise ValueError(f"cannot divide {x} by {y} without remainder")
+    return a
 
 
 def getval(dct, key, noupdate):
@@ -36,8 +43,8 @@ def getunknown(dct, key, val, unkowns):
         if op == sub:
             return getunknown(dct, a, val + dct[b], unkowns)
         if op == mul:
-            return getunknown(dct, a, val // dct[b], unkowns)
-        if op == floordiv:
+            return getunknown(dct, a, div(val, dct[b]), unkowns)
+        if op == div:
             return getunknown(dct, a, val * dct[b], unkowns)
     if b in unkowns:
         if op == add:
@@ -45,13 +52,13 @@ def getunknown(dct, key, val, unkowns):
         if op == sub:
             return getunknown(dct, b, dct[a] - val, unkowns)
         if op == mul:
-            return getunknown(dct, b, val // dct[a], unkowns)
-        if op == floordiv:
-            return getunknown(dct, b, dct[a] // val, unkowns)
+            return getunknown(dct, b, div(val, dct[a]), unkowns)
+        if op == div:
+            return getunknown(dct, b, div(dct[a], val), unkowns)
     raise ValueError(f"no unknown at {key} = {val}")
 
 
-OPS = {"+": add, "*": mul, "-": sub, "/": floordiv}
+OPS = {"+": add, "*": mul, "-": sub, "/": div}
 monkeys = {}
 with open("input21.txt") as fobj:
     for line in fobj:
@@ -66,4 +73,4 @@ nup = getnoupdate(monkeys, "humn")
 print(getval(monkeys, "root", nup))
 a, _, b = monkeys["root"]
 monkeys["root"] = a, sub, b
-print(getunknown(monkeys, "root", 0, nup)[2])
+print(getunknown(monkeys, "root", 0, nup))
